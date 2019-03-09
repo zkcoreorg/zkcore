@@ -35,7 +35,7 @@ typedef u32 au32;
 #endif
 
 #ifndef RESTBITS
-#define RESTBITS	8
+#define RESTBITS	4
 #endif
 
 // 2_log of number of buckets
@@ -323,7 +323,7 @@ struct equi {
     u32 dunits;
     u32 prevbo;
     u32 nextbo;
-  
+
     htlayout(equi *eq, u32 r): hta(eq->hta), prevhashunits(0), dunits(0) {
       u32 nexthashbytes = hashsize(r);
       nexthashunits = hashwords(nexthashbytes);
@@ -345,6 +345,8 @@ struct equi {
       return (pslot->hash->bytes[prevbo] & 0x1f) << 4 | pslot->hash->bytes[prevbo+1] >> 4;
 #elif WN == 144 && RESTBITS == 4
       return pslot->hash->bytes[prevbo] & 0xf;
+#elif WN == 192 && RESTBITS == 4
+			return pslot->hash->bytes[prevbo] & 0xf;
 #else
 #error non implemented
 #endif
@@ -358,6 +360,8 @@ struct equi {
       return (pslot->hash->bytes[prevbo]&1) << 8 | pslot->hash->bytes[prevbo+1];
 #elif WN == 144 && RESTBITS == 4
       return pslot->hash->bytes[prevbo] & 0xf;
+#elif WN == 192 && RESTBITS == 4
+			return pslot->hash->bytes[prevbo] & 0xf;
 #else
 #error non implemented
 #endif
@@ -466,7 +470,7 @@ struct equi {
       }
     }
   }
-  
+
   void digitodd(const u32 r, const u32 id) {
     htlayout htl(this, r);
     collisiondata cd;
@@ -499,6 +503,10 @@ struct equi {
           xorbucketid = ((((u32)(bytes0[htl.prevbo+1] ^ bytes1[htl.prevbo+1]) << 8)
                               | (bytes0[htl.prevbo+2] ^ bytes1[htl.prevbo+2])) << 4)
                               | (bytes0[htl.prevbo+3] ^ bytes1[htl.prevbo+3]) >> 4;
+#elif WN == 192 && BUCKBITS == 20 && RESTBITS == 4
+  				xorbucketid = ((((u32)(bytes0[htl.prevbo + 1] ^ bytes1[htl.prevbo + 1]) << 8)
+                    					| (bytes0[htl.prevbo + 2] ^ bytes1[htl.prevbo + 2])) << 4)
+                    					| (bytes0[htl.prevbo + 3] ^ bytes1[htl.prevbo + 3]) >> 4;
 #elif WN == 96 && BUCKBITS == 12 && RESTBITS == 4
           xorbucketid = ((u32)(bytes0[htl.prevbo+1] ^ bytes1[htl.prevbo+1]) << 4)
                             | (bytes0[htl.prevbo+2] ^ bytes1[htl.prevbo+2]) >> 4;
@@ -518,7 +526,7 @@ struct equi {
       }
     }
   }
-  
+
   void digiteven(const u32 r, const u32 id) {
     htlayout htl(this, r);
     collisiondata cd;
@@ -551,6 +559,10 @@ struct equi {
           xorbucketid = ((((u32)(bytes0[htl.prevbo+1] ^ bytes1[htl.prevbo+1]) << 8)
                               | (bytes0[htl.prevbo+2] ^ bytes1[htl.prevbo+2])) << 4)
                               | (bytes0[htl.prevbo+3] ^ bytes1[htl.prevbo+3]) >> 4;
+#elif WN == 192 && BUCKBITS == 20 && RESTBITS == 4
+  				xorbucketid = ((((u32)(bytes0[htl.prevbo + 1] ^ bytes1[htl.prevbo + 1]) << 8)
+                    					| (bytes0[htl.prevbo + 2] ^ bytes1[htl.prevbo + 2])) << 4)
+                    					| (bytes0[htl.prevbo + 3] ^ bytes1[htl.prevbo + 3]) >> 4;
 #elif WN == 96 && BUCKBITS == 12 && RESTBITS == 4
           xorbucketid = ((u32)(bytes0[htl.prevbo+1] ^ bytes1[htl.prevbo+1]) << 4)
                             | (bytes0[htl.prevbo+2] ^ bytes1[htl.prevbo+2]) >> 4;
@@ -570,7 +582,7 @@ struct equi {
       }
     }
   }
-  
+
   void digitK(const u32 id) {
     collisiondata cd;
     htlayout htl(this, WK);
