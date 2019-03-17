@@ -291,9 +291,9 @@ public:
             boost::assign::map_list_of
             (0, consensus.hashGenesisBlock),
             1549122056,  // * UNIX timestamp of last checkpoint block
-            47163,       // * total number of transactions between genesis and last checkpoint
+            0,       // * total number of transactions between genesis and last checkpoint
                          //   (the tx=... number in the SetBestChain debug.log lines)
-            715          //   total number of tx / (checkpoint block height / (24 * 24))
+            0          //   total number of tx / (checkpoint block height / (24 * 24))
         };
 
         // Founders reward script expects a vector of 2-of-3 multisig addresses
@@ -372,12 +372,11 @@ public:
 
         checkpointData = (CCheckpointData){
             boost::assign::map_list_of
-            (0, consensus.hashGenesisBlock)
-            (1, uint256S("0x066446ced1963a7a249bb735ff35dee0d667dc2e9b235f08c557fee65c7197fe")),
-            1552830730,  // * UNIX timestamp of last checkpoint block
-            2,       // * total number of transactions between genesis and last checkpoint
+            (0, consensus.hashGenesisBlock),
+            0,  // * UNIX timestamp of last checkpoint block
+            0,       // * total number of transactions between genesis and last checkpoint
                          //   (the tx=... number in the SetBestChain debug.log lines)
-            1176          //   total number of tx / (checkpoint block height / (24 * 24))
+            0          //   total number of tx / (checkpoint block height / (24 * 24))
         };
         // These prefixes are the same as the testnet prefixes
         base58Prefixes[PUBKEY_ADDRESS]     = {0x1D,0x25};
