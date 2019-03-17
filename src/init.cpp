@@ -394,7 +394,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-peerbloomfilters", strprintf(_("Support filtering of blocks and transaction with Bloom filters (default: %u)"), 1));
     if (showDebug)
         strUsage += HelpMessageOpt("-enforcenodebloom", strprintf("Enforce minimum protocol version to limit use of Bloom filters (default: %u)", 0));
-    strUsage += HelpMessageOpt("-port=<port>", strprintf(_("Listen for connections on <port> (default: %u or testnet: %u)"), 8233, 18233));
+    strUsage += HelpMessageOpt("-port=<port>", strprintf(_("Listen for connections on <port> (default: %u or testnet: %u)"), 8733, 18733));
     strUsage += HelpMessageOpt("-proxy=<ip:port>", _("Connect through SOCKS5 proxy"));
     strUsage += HelpMessageOpt("-proxyrandomize", strprintf(_("Randomize credentials for every proxy connection. This enables Tor stream isolation (default: %u)"), 1));
     strUsage += HelpMessageOpt("-seednode=<ip>", _("Connect to a node to retrieve peer addresses, and disconnect"));
@@ -701,7 +701,7 @@ static void ZC_LoadParams(
         boost::filesystem::exists(sprout_groth16)
     )) {
         uiInterface.ThreadSafeMessageBox(strprintf(
-            _("Cannot find the Zcash network parameters in the following directory:\n"
+            _("Cannot find the zkCore network parameters in the following directory:\n"
               "%s\n"
               "Please run 'zcash-fetch-params' or './zcutil/fetch-params.sh' and then restart."),
                 ZC_GetParamsDir()),
@@ -854,7 +854,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     fLogIPs = GetBoolArg("-logips", false);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Zcash version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
+    LogPrintf("zkCore version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
 
     // when specifying an explicit binding address, you want to listen on it
     // even when -connect or -proxy is specified
@@ -1221,7 +1221,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     libsnark::inhibit_profiling_info = true;
     libsnark::inhibit_profiling_counters = true;
 
-    // Initialize Zcash circuit parameters
+    // Initialize zkCore circuit parameters
     ZC_LoadParams(chainparams);
 
     if (GetBoolArg("-savesproutr1cs", false)) {
@@ -1620,10 +1620,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
                 InitWarning(msg);
             }
             else if (nLoadWalletRet == DB_TOO_NEW)
-                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Zcash") << "\n";
+                strErrors << _("Error loading wallet.dat: Wallet requires newer version of zkCore") << "\n";
             else if (nLoadWalletRet == DB_NEED_REWRITE)
             {
-                strErrors << _("Wallet needed to be rewritten: restart Zcash to complete") << "\n";
+                strErrors << _("Wallet needed to be rewritten: restart zkCore to complete") << "\n";
                 LogPrintf("%s", strErrors.str());
                 return InitError(strErrors.str());
             }
@@ -1730,10 +1730,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 #ifdef ENABLE_MINING
  #ifndef ENABLE_WALLET
     if (GetBoolArg("-minetolocalwallet", false)) {
-        return InitError(_("zkCore was not built with wallet support. Set -minetolocalwallet=0 to use -mineraddress, or rebuild Zcash with wallet support."));
+        return InitError(_("zkCore was not built with wallet support. Set -minetolocalwallet=0 to use -mineraddress, or rebuild zkCore with wallet support."));
     }
     if (GetArg("-mineraddress", "").empty() && GetBoolArg("-gen", false)) {
-        return InitError(_("zkCore was not built with wallet support. Set -mineraddress, or rebuild Zcash with wallet support."));
+        return InitError(_("zkCore was not built with wallet support. Set -mineraddress, or rebuild zkCore with wallet support."));
     }
  #endif // !ENABLE_WALLET
 

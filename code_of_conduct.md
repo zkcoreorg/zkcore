@@ -58,4 +58,3 @@ version 1.3.0, available at
 
 [homepage]: https://www.contributor-covenant.org
 [version]: https://www.contributor-covenant.org/version/1/3/0/
-

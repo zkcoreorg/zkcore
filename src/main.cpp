@@ -45,7 +45,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Zcash cannot be compiled without assertions."
+# error "zkCore cannot be compiled without assertions."
 #endif
 
 #include "librustzcash.h"
@@ -1733,7 +1733,6 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     CAmount nSubsidy = 5 * COIN;
     if (nHeight==1) return COIN * 600000;
-
     // Mining slow start
     // The subsidy is ramped up linearly, skipping the middle payout of
     // MAX_SUBSIDY/2 to keep the monetary curve consistent with no slow start.

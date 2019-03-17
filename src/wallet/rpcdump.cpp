@@ -178,7 +178,7 @@ UniValue importaddress(const UniValue& params, bool fHelp)
         std::vector<unsigned char> data(ParseHex(params[0].get_str()));
         script = CScript(data.begin(), data.end());
     } else {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Zcash address or script");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid zkCore address or script");
     }
 
     string strLabel = "";
@@ -294,7 +294,7 @@ UniValue importwallet_impl(const UniValue& params, bool fHelp, bool fImportZKeys
         if (vstr.size() < 2)
             continue;
 
-        // Let's see if the address is a valid Zcash spending key
+        // Let's see if the address is a valid zkCore spending key
         if (fImportZKeys) {
             auto spendingkey = DecodeSpendingKey(vstr[0]);
             int64_t nTime = DecodeDumpTime(vstr[1]);
@@ -313,7 +313,7 @@ UniValue importwallet_impl(const UniValue& params, bool fHelp, bool fImportZKeys
                 continue;
             } else {
                 LogPrint("zrpc", "Importing detected an error: invalid spending key. Trying as a transparent key...\n");
-                // Not a valid spending key, so carry on and see if it's a Zcash style t-address.
+                // Not a valid spending key, so carry on and see if it's a zkCore style t-address.
             }
         }
 
@@ -399,7 +399,7 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     std::string strAddress = params[0].get_str();
     CTxDestination dest = DecodeDestination(strAddress);
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Zcash address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid zkCore address");
     }
     const CKeyID *keyID = boost::get<CKeyID>(&dest);
     if (!keyID) {
@@ -501,7 +501,7 @@ UniValue dumpwallet_impl(const UniValue& params, bool fHelp, bool fDumpZKeys)
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
     // produce output
-    file << strprintf("# Wallet dump created by Zcash %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
+    file << strprintf("# Wallet dump created by zkCore %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));

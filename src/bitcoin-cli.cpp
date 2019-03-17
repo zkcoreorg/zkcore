@@ -80,7 +80,7 @@ static int AppInitRPC(int argc, char* argv[])
         std::string strUsage = _("zkCore RPC client version") + " " + FormatFullVersion() + "\n" + PrivacyInfo();
         if (!mapArgs.count("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  zkcore-cli [options] <command> [params]  " + _("Send command to Zcash") + "\n" +
+                  "  zkcore-cli [options] <command> [params]  " + _("Send command to zkCore") + "\n" +
                   "  zkcore-cli [options] help                " + _("List commands") + "\n" +
                   "  zkcore-cli [options] help <command>      " + _("Get help for a command") + "\n";
 

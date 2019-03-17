@@ -269,7 +269,7 @@ UniValue setaccount(const UniValue& params, bool fHelp)
             "setaccount \"zkcoreaddress\" \"account\"\n"
             "\nDEPRECATED. Sets the account associated with the given address.\n"
             "\nArguments:\n"
-            "1. \"zkcoreaddress\"  (string, required) The Zcash address to be associated with an account.\n"
+            "1. \"zkcoreaddress\"  (string, required) The zkCore address to be associated with an account.\n"
             "2. \"account\"         (string, required) MUST be set to the empty string \"\" to represent the default account. Passing any other string will result in an error.\n"
             "\nExamples:\n"
             + HelpExampleCli("setaccount", "\"t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\" \"tabby\"")
@@ -315,7 +315,7 @@ UniValue getaccount(const UniValue& params, bool fHelp)
             "getaccount \"zkcoreaddress\"\n"
             "\nDEPRECATED. Returns the account associated with the given address.\n"
             "\nArguments:\n"
-            "1. \"zkcoreaddress\"  (string, required) The Zcash address for account lookup.\n"
+            "1. \"zkcoreaddress\"  (string, required) The zkCore address for account lookup.\n"
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
             "\nExamples:\n"
@@ -352,7 +352,7 @@ UniValue getaddressesbyaccount(const UniValue& params, bool fHelp)
             "1. \"account\"  (string, required) MUST be set to the empty string \"\" to represent the default account. Passing any other string will result in an error.\n"
             "\nResult:\n"
             "[                     (json array of string)\n"
-            "  \"zkcoreaddress\"  (string) a Zcash address associated with the given account\n"
+            "  \"zkcoreaddress\"  (string) a zkCore address associated with the given account\n"
             "  ,...\n"
             "]\n"
             "\nExamples:\n"
@@ -418,7 +418,7 @@ UniValue sendtoaddress(const UniValue& params, bool fHelp)
             "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n"
             + HelpRequiringPassphrase() +
             "\nArguments:\n"
-            "1. \"zkcoreaddress\"  (string, required) The Zcash address to send to.\n"
+            "1. \"zkcoreaddress\"  (string, required) The zkCore address to send to.\n"
             "2. \"amount\"      (numeric, required) The amount in " + CURRENCY_UNIT + " to send. eg 0.1\n"
             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
             "                             This is not part of the transaction, just kept in your wallet.\n"
@@ -894,7 +894,7 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
             "sendfrom \"fromaccount\" \"tozcashaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
-            "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a Zcash address.\n"
+            "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a zkCore address.\n"
             "The amount is a real and is rounded to the nearest 0.00000001."
             + HelpRequiringPassphrase() + "\n"
             "\nArguments:\n"

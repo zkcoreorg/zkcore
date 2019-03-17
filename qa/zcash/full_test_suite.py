@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 #
-# Execute all of the automated tests related to Zcash.
+# Execute all of the automated tests related to zkCore.
 #
 
 import argparse
